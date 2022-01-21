@@ -53,4 +53,30 @@ class DoubleLinkedList:
         temp._prev = None
         self.lenght -= 1
         return temp
+    
+    def prepend(self, value: int):
+        prepend_node = Node(value)
+        if self.head == None:
+            self.head = prepend_node
+            self.tail = prepend_node
+        else:
+            prepend_node._next = self.head
+            self.head = prepend_node
+        self.lenght += 1
+        return True
+    
+    def pop_first(self) -> Node:
+        if self.lenght == 0:
+            return None
+        temp = self.head
+        if self.lenght == 1:
+            self.head = None
+            self.tail = None
+        else:
+            self.head = temp._next
+            self.head._prev = None
+            temp._next = None
+        self.lenght -= 1
+        return temp
+
 
