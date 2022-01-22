@@ -103,4 +103,40 @@ class DoubleLinkedList:
             temp.value = value
             return True
         return False
+    
+    def insert(self, index: int, value: int):
+        if index < 0 or index > self.lenght:
+            return False
+        if index == 0:
+            return self.prepend(value)
+        if index == self.lenght:
+            return self.append(value)
+        insert_node = Node(value)
+        temp = self.get(index)
+        _prev = temp._prev
+        
+        insert_node._prev = _prev
+        insert_node._next = temp
+        
+        _prev._next = insert_node
+        temp._prev = insert_node
+        
+        self.lenght += 1
+        return True
+    
+    def remove(self, index) -> Node:
+        if index < 0 or index >= self.lenght:
+            return None
+        if index == 0:
+            return self.pop_first()
+        if index == self.lenght - 1:
+            return self.pop()
+        temp = self.get(index)
+        temp._prev._next = temp._next
+        temp._next._prev = temp._prev
 
+        temp._prev = None
+        temp._next = None
+
+        self.lenght -= 1
+        return temp
