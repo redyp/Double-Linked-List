@@ -78,5 +78,29 @@ class DoubleLinkedList:
             temp._next = None
         self.lenght -= 1
         return temp
-
+    
+    def get(self, index: int):
+        if index < 0 or index >= self.lenght:
+            return None
+        if index == 0:
+            return self.head
+        if index == self.lenght - 1:
+            return self.tail
+        temp = self.head
+        if index < self.lenght / 2:
+            for _ in range(index):
+                temp = temp._next
+            return temp
+        else:
+            temp = self.tail
+            for _ in range(self.lenght - 1, index, -1):
+                temp = temp._prev
+            return temp
+    
+    def set_value(self, index: int, value: int):
+        temp = self.get(index)
+        if temp:
+            temp.value = value
+            return True
+        return False
 
